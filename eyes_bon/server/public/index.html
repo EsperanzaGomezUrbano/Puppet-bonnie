@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Diseño del HTML utilizando Bootstrap -->
+	<meta charset="utf-8">
+	<title>Angulos del Servo</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<style media="screen">
+	html, body{
+		height: 100%;
+	}
+	body{
+		display: flex; 
+		align-items: center;
+		background: #7eda7c;
+	}
+	</style>
+	
+</head>
+<body>
+
+	<div class="container">
+		<div class="row justify-content-center align-self-center">
+			<div class="card">
+				<br>
+				
+				<center><h1>ANGULOS DE LOS OJOS</h1></center>
+	<br>
+				<div class="card header">
+					Rango de 0 a 180 grados
+				</div>
+				<h2 id="angulo" class ="display-3 p-4"></h2> 
+			</div>
+		</div>
+	</div>
+	<!-- Se agrega la ruta para la biblioteca de socket.io versión 4.5.1 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" charset="utf-8"></script>
+	<script>
+		//<!-- Se inicializa la conexión de sockets creando una instancia socket -->
+		//<!-- Para la conexión se agrega la IP de la Rasp y el puerto utilizado -->
+	var socket = io('http://192.168.100.67:3000');;
+	 
+//	<!-- Se hace la interrupcion con el evento 'acel' y se reciben los datos -->
+	socket.on('ang', function(data){
+		//<!-- Los datos se muestran por consola -->
+		console.log(data);
+		let ang = document.getElementById('angulo');
+		ang.innerHTML = data;
+});
+
+	</script>
+</body>
+</html>
